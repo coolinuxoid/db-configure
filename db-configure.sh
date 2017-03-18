@@ -1,16 +1,23 @@
 function select-dbsrv() {
 #!/bin/bash
 #Selecting Database Server
-while [[ "$dboption" != 1 && "$dboption" != 2 ]]
+clear
+while [[ "$REPLY" != 1 && "$REPLY" != 2 && "$REPLY" != 0 ]]
 do
-        echo -e "Please select Database Server type that you want to configure"
-        echo -n "Mysql[1] or PostgreSQL[2]:"
-        read dboption
-        sleep 2
+        echo "
+Please select Database Server type that you want to configure
+  1. Mysql
+  2. PostgreSQL
+  0. Quit
+        "
+	read -p "Enter selection [0-2] > "
 done
-case $dboption in
+case $REPLY in
         1) mysql_configure ;;
         2) pgsql_configure ;;
+	0) echo "Bye bye"
+	exit 1;;
+	*) echo "Please select [0-2]" ;;
 esac
 }
 #MYSQL INSTALLATION
@@ -174,7 +181,7 @@ while true; do
                 read pgsql_menu
                 case $pgsql_menu in
                         1)
-                        ./pgsqlpass-remove.sh &&
+                        ./pgsqlpass-remove.sh && sleep 1
                         set_pgsql_pass && break
                         ;;
                         2)
