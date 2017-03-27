@@ -70,7 +70,7 @@ while true; do
 			./mysqlpass-remove.sh &&
 			set_mysql_pass && break
 			;;
-			2)
+			*)
 			echo "Please try again"
 			;;
 		esac
@@ -151,7 +151,7 @@ then
                 case $ANSWER in
                 y)
                         yum install postgresql postgresql-server -y
-                        service postgresql initdb &&
+                        service postgresql initdb
 			service postgresql start &&
                         echo "PostgreSQL-server started"
                         sleep 1 ;;
